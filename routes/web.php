@@ -13,31 +13,31 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::get('/login', function () {
-//     return view('auth.login');
-// });
-
-
-// Route::get('/signup', function () {
-//     return view('auth.signup');
-// });
-
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('auth.dashboard');
+Route::post('/dashboard', [DashboardController::class, 'index'])->name('auth.dashboard');
 
-// Route::get('/search', function () {
-//     $query = request('q'); // Get the search query from the URL
-//     $books = Book::where('title', 'like', '%' . $query . '%')
-//                 ->orWhere('author', 'like', '%' . $query . '%')
-//                 ->orWhere('course_code', 'like', '%' . $query . '%')
-//                 ->get(); // Fetch books that match the search term
-//     return view('search', ['books' => $books, 'query' => $query]);
-// });
- 
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('dashboard');
+
+
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate(); // Clear user session
+    $request->session()->regenerateToken(); // Regenerate token
+    return redirect('/login'); // Redirect to login
+})->name('logout');
+
+Route::get('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate(); // Clear user session
+    $request->session()->regenerateToken(); // Regenerate token
+    return redirect('/login'); // Redirect to login
+})->name('logout');
 
 Route::get('/api/search-books', function (Request $request) {
     $query = $request->query('q', ''); // Get the query string
@@ -75,6 +75,9 @@ Route::get('/books/{id}/download', function ($id) {
 
 Route::get('/', function () {
     $popularBooks = Book::orderBy('popularity', 'desc')->limit(11)->get(); // Fetch top 11 popular books
-    return view('index', ['popularBooks' => $popularBooks]); // Pass the data to the index view
+    return view('index', ['popularBooks' => $popularBooks]); // Display the data to the main/index view
 });
 
+Route::get('/upload', function () {
+    return view('upload'); // Make sure the upload view exists in resources/views/upload.blade.php
+})->middleware('auth')->name('upload');

@@ -1,47 +1,50 @@
 <x-layout>
-  
-   {{-- <div class="dotted-animation"></div> --}}
-    {{-- <div class="moving-box"></div>
-    <div class="rotating-box"></div> --}}
+    <div class="dotted-animation z-[-1]"></div>
 
-     <!-- 3D Cube -->
-    <div class="absolute w-24 h-24 top-1/2 left-1/2 z-[-1]">
-        <div class="cube">
-            <div class="cube-face front bg-gradient-to-br from-blue-400 to-blue-600 rounded-[8px] shadow-lg"></div>
-            <div class="cube-face back bg-gradient-to-br from-blue-400 to-blue-600 rounded-[8px] shadow-lg"></div>
-            <div class="cube-face left bg-gradient-to-br from-blue-400 to-blue-600 rounded-[8px] shadow-lg"></div>
-            <div class="cube-face right bg-gradient-to-br from-blue-400 to-blue-600 rounded-[8px] shadow-lg"></div>
-            <div class="cube-face top bg-gradient-to-br from-blue-400 to-blue-600 rounded-[8px] shadow-lg"></div>
-            <div class="cube-face bottom bg-gradient-to-br from-blue-400 to-blue-600 rounded-[8px] shadow-lg"></div>
+
+    
+
+    <main class="flex flex-col items-center mt-[12rem] fade-in relative">
+        <div class="absolute inset-0 z-[-20]">
+            <!-- Left Side -->
+            <div class="absolute left-0 top-0 w-1/4 h-full bg-cover bg-left mix-blend-multiply opacity-50" 
+                style="background-image: url('{{ asset('images/line-left.png') }}');">
+            </div>
+        
+            <!-- Right Side -->
+            <div class="absolute right-0 top-0 w-1/4 h-full bg-cover bg-right mix-blend-multiply opacity-50" 
+                style="background-image: url('{{ asset('images/line-right.png') }}');">
+            </div>
         </div>
-    </div>
+       
+</div>
+        <img class="absolute w-[600px] h-[300px] z-[-4] top-0" src="{{ asset('images/blob.svg') }}" alt="">
 
-
-    <main class="flex flex-col items-center mt-[12rem] fade-in ">
-
-        <h1 class="text-3xl font-bold text-center">
-            Find All the Study Materials You Need for
-            <br />
+        <h1 class="text-4xl font-bold text-gray-800 text-center" style="font-weight: 900;">
+            Find, Share & Download<br>
             <span class=""
-                style="color: #0057E9; text-shadow:  0 10px 12px 0 rgba(78, 75, 250, 0.1);">Unimaid</span>
-            Fast and Free!
+                style="color: #0057E9; text-shadow:  0 10px 12px 0 rgba(78, 75, 250, 0.1);">Unimaid</span> 
+                 Materials Instantly!
         </h1>
 
         {{-- main search bar --}}
         <div class="relative mt-8 w-full max-w-2xl search-container">
+            <div class="">
             <input
-                class="w-full border-2 border-blue-500 shadow-lg rounded-full px-6 py-4 text-lg outline-none focus:ring-4 focus:ring-blue-100"
-                placeholder="Search... GST 111" id="search-bar" type="text" />
-            <button class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white rounded-full w-[48px] h-[48px]"
+                class="w-full border-4 border-gradient-to-r from-blue-100 to-indigo-600 shadow-lg rounded-full px-6 py-4 text-lg outline-none focus:ring-4 focus:ring-blue-100"
+                placeholder="Search course materials e.g., GST 111" id="search-bar" type="text" />
+            <button
+                class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white rounded-full w-[48px] h-[48px]"
                 style="background: #0057E9; box-shadow:  0 10px 12px 0 rgba(78, 75, 250, 0.1);">
                 <i class="fas fa-search text-2xl">
                 </i>
             </button>
-            <div id="search-results" class="hidden mt-2 bg-white shadow-lg rounded-lg p-4"></div>
         </div>
+    </div>
+    <div id="search-results" class="hidden mt-2 bg-white shadow-lg rounded-lg p-4 w-full max-w-2xl"></div>
 
         <div class="mt-8 text-center md:w-1/2" id="popular-materials">
-            <h2 class="text-xl text-gray-800 heading-font">
+            <h2 class="text-xl text-gray-800 heading-font" style="font-weight: 600;">
                 Popular Materials
             </h2>
             <div class="flex flex-wrap justify-center mt-4 gap-6">
@@ -55,7 +58,7 @@
                                 class="flex items-center space-x-2 border border-gray-200 px-4 py-2 rounded-full cursor-pointer hover:ring-2 hover:ring-blue-100">
                                 <img alt="" class="w-8 h-8 rounded-full" height="40"
                                     src="{{ asset('\images/book_cover.png') }}" width="40" />
-                                <span class="argent-font uppercase">
+                                <span class="uppercase text-gray-600" style="font-weight: 600;">
                                     {{ $book->course_code }}
                                 </span>
                             </div>
@@ -67,7 +70,7 @@
 
             </div>
         </div>
-        
+
         <div class="flex gap-2 mt-16">
 
             <div class="text-white p-6 rounded-2xl shadow-lg flex items-center justify-between max-w-4xl mx-auto text-sm"
@@ -85,7 +88,7 @@
                     </div>
                     <!-- Text Section -->
                     <div>
-                        <h3 class="text-xl font-semibold">Resourcehub</h3>
+                        <h3 class="text-xl font-semibold">Edumaidvtu</h3>
                         <p class="text-sm">
                             We offer <span class="font-bold">Data</span>, <span class="font-bold">Airtime</span>, &
                             <span class="font-bold">Bills Services</span> at cheaper rates!
@@ -107,4 +110,37 @@
         </div>
 
     </main>
+
+    <div id="popup" class="fixed bottom-10 right-10 bg-white shadow-lg p-5 rounded-lg border border-gray-200 
+    transform translate-y-10 opacity-0 transition-all duration-500 w-80">
+    <div class="flex justify-between items-center">
+        <h2 class="text-lg font-bold">Hey there! 🎉</h2>
+        <button id="closePopup" class="text-gray-500 hover:text-gray-700">&times;</button>
+    </div>
+    <p class="text-sm text-gray-600 mt-2">Happy to see you, learn more. Keep going!</p>
+</div>
+
+
+<script>
+window.addEventListener("scroll", () => {
+    const popup = document.getElementById("popup");
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (scrollTop > (scrollHeight - clientHeight) / 2) {
+        popup.classList.remove("translate-y-10", "opacity-0");
+        popup.classList.add("translate-y-0", "opacity-100");
+    }
+});
+
+document.getElementById("closePopup").addEventListener("click", () => {
+    document.getElementById("popup").classList.add("hidden");
+});
+</script>
+
+    <x-footer>
+
+    </x-footer>
+
 </x-layout>

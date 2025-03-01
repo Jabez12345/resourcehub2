@@ -27,7 +27,8 @@ class LoginController extends Controller
         // Attempt to authenticate the user
         if (Auth::attempt($request->only('email', 'password'))) {
             // Redirect to dashboard if login is successful
-            return redirect()->route('auth.dashboard')->with('status', 'Login successful!');
+            session()->flash('login_success', 'Welcome back, ' . Auth::user()->email . '!');
+            return redirect()->route('dashboard')->with('status', 'Login successful!');
         }
 
         // Redirect back with an error message if login fails

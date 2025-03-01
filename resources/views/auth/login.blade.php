@@ -1,34 +1,44 @@
-<x-layout>
-    <div class="m-0 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+<html>
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <style>
+      html{
+        font-family: inter;
+      }
+        @keyframes zoom-infinite {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        .zoom-animation {
+            animation: zoom-infinite 7s infinite alternate ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gray-100 text-gray-900 flex flex-col justify-center">
+    <div class="m-0 bg-white flex justify-center flex-1">
         <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
 
-            <div class="mt-20 flex flex-col items-center relative">
-                <a href="/" class="absolute top-0 left-[-50%] flex items-center text-blue-500 border border-gray-200 rounded-[8px] h-[48px] px-2 hover:bg-gray-200">
-                    <i class="fas fa-chevron-left mr-2"></i>
-                    Go Home
-                </a>
-    
-                <h1 class="text-xl font-bold text-center text-blue-600">
-                    Welcome Back to BookStats!🚀
+            <form method="POST" action="{{ route('login') }}" class="mt-4 flex flex-col items-center">
+
+                @csrf
+                <h1 class="text-2xl" style="font-weight: 600;">
+                    Welcome back! 🎉 Login
                 </h1>
-                <p class="text-gray-500 text-center mt-2">
-                    Log in to access tons of materials.
-                </p>
-                 <!-- Display Validation Errors -->
-        @if ($errors->any())
-        <div class="bg-red-100 text-red-600 p-3 rounded mt-4">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-                <form method="POST" action="{{ route('login') }}" class="w-full flex-1 mt-8">
-                    @csrf
-                    {{--<div class="flex flex-col items-center">
+                <div class="w-full flex-1 mt-8">
+                    <div class="flex flex-col items-center">
                         <button
-                            class="w-full max-w-xs font-semibold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-600 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                            class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                             <div class="bg-white p-2 rounded-full">
                                 <svg class="w-4" viewBox="0 0 533.5 544.3">
                                     <path
@@ -50,71 +60,59 @@
                             </span>
                         </button>
 
-                        <!-- <button
-                            class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
-                            <div class="bg-white p-1 rounded-full">
-                                <svg class="w-6" viewBox="0 0 32 32">
-                                    <path fill-rule="evenodd"
-                                        d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387.602.11.82-.258.82-.578 0-.286-.011-1.04-.015-2.04-3.34.723-4.043-1.609-4.043-1.609-.547-1.387-1.332-1.758-1.332-1.758-1.09-.742.082-.726.082-.726 1.203.086 1.836 1.234 1.836 1.234 1.07 1.836 2.808 1.305 3.492 1 .11-.777.422-1.305.762-1.605-2.664-.301-5.465-1.332-5.465-5.93 0-1.313.469-2.383 1.234-3.223-.121-.3-.535-1.523.117-3.175 0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0116 9.805c1.02.004 2.047.136 3.004.402 2.293-1.55 3.297-1.23 3.297-1.23.656 1.652.246 2.875.12 3.175.77.84 1.231 1.91 1.231 3.223 0 4.61-2.804 5.621-5.476 5.922.43.367.812 1.101.812 2.219 0 1.605-.011 2.898-.011 3.293 0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z" />
-                                </svg>
-                            </div>
-                            <span class="ml-4">
-                                Login with GitHub
-                            </span>
-                        </button>  
-                    </div> --}}
 
-                    {{-- <div class="my-12 border-b text-center">
+                    </div>
+
+                    <div class="my-12 border-b text-center">
                         <div
                             class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
                             Or Login with e-mail
                         </div>
-                    </div> --}}
+                    </div>
+
+
+
+                    <!-- Display Validation Errors -->
+                    @if ($errors->any())
+                        <div class="text-red-600 p-3 rounded mt-4 text-center">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
 
                     <div class="mx-auto max-w-xs">
-                        <div class="relative">
-                            <!-- <label for="email" class="placeholder-gray-500 text-sm">Email</label> -->
-                            <input
-                                class="w-full px-8 py-4 rounded-3xl font-medium border-2 border-gray-300 placeholder-gray-500 text-sm focus:ring-4 focus:ring-blue-300 focus:outline-none focus:bg-white mt-8"
-                                type="email" name="email" placeholder="Email" value="{{ old('email') }}" required />
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="absolute right-4 top-1/2 text-gray-500">
-                                <path d="M20 8V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4M3 8l9 6 9-6" />
-                                <path
-                                    d="M3 6c0-1.104.896-2 2-2h14c1.104 0 2 0.896 2 2v12c0 1.104-.896 2-2 2H5c-1.104 0-2-.896-2-2V6z" />
-                            </svg>
+
+                        <!--Email input-->
+                        <div class="bg-white pt-4">
+                            <div class="relative bg-inherit">
+                                <input type="text" id="email" name="email"
+                                    class="peer w-full px-8 py-4 rounded-[15px] font-medium border-2 border-gray-200 placeholder-gray-500 text-sm bg-gray-100 focus:outline-none focus:border-4 focus:border-blue-100 focus:bg-white placeholder-transparent"
+                                    placeholder="email" value="{{ old('email') }}" required />
+                                <label for="email"
+                                    class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:bg-gray-100 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:mx-6 peer-placeholder-shown:px-2 peer-focus:bg-white peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Email</label>
+                            </div>
                         </div>
-                        <!-- <label for="Password" class="text-gray-500 text-sm">Password</label> -->
-                        <div class="relative">
-                            <input
-                                class="w-full px-8 py-4 rounded-3xl font-medium border-2 border-gray-300 placeholder-gray-500 text-sm focus:ring-4 focus:ring-blue-300 focus:outline-none focus:bg-white mt-8"
-                                type="password" name="password" placeholder="Password" required />
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="absolute right-4 top-1/2 text-gray-500">
-                                <path d="M12 4C7 4 4 7 4 7s3 3 8 3 8-3 8-3-3-3-8-3z" />
-                                <circle cx="12" cy="12" r="3" />
-                                <path d="M12 16c-4 0-8 3-8 3s3 3 8 3 8-3 8-3-4-3-8-3z" />
-                            </svg>
+                        <!--Password input-->
+                        <div class="bg-white pt-6">
+                            <div class="relative bg-inherit">
+                                <input type="text" id="password" name="password"
+                                    class="peer w-full px-8 py-4 rounded-[15px] font-medium border-2 border-gray-200 placeholder-gray-500 text-sm bg-gray-100 focus:outline-none focus:border-4 focus:border-blue-100 focus:bg-white placeholder-transparent"
+                                    placeholder="Password" required />
+                                <label for="password"
+                                    class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:bg-gray-100 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:mx-6 peer-placeholder-shown:px-2 peer-focus:bg-white peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Password</label>
+                            </div>
+                        </div>
+                        <div class="w-full flex justify-between my-2">
+                            <div class=""></div>
+                            <a href="#" class="text-blue-500 text-sm">forgot password?</a>
                         </div>
 
-                        <div class="flex items-center justify-between my-4 text-sm text-gray-600">
-                            <label for="remember" class="inline-flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="remember"
-                                    name="remember"
-                                    class="mr-2"
-                                />
-                                Remember Me
-                            </label>
-                            <a href="#" class="text-blue-500 text-sm">Forgot Password?</a>
-                        </div>
-
-                    
                         <button
-                            class="mt-5 tracking-wide font-semibold bg-blue-600 text-gray-100 w-full py-4 rounded-3xl hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                            class="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-[15px] hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                             <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -122,33 +120,118 @@
                                 <path d="M20 8v6M23 11h-6" />
                             </svg>
                             <span class="ml-3">
-                                Login
+                                Sign Up
                             </span>
                         </button>
-                        <span class="text-xs text-gray-600 text-center space-y-4">Don't Have an account? <a
-                                href="/register" class="text-blue-600 underline">signup</a> to your account</span>
                         <p class="mt-6 text-xs text-gray-600 text-center">
-                            I agree to abide by ResourceHub's
-                            <a href="#" class="border-b border-gray-500 border-dotted text-blue-600">
+                            I agree to abide by Edumaid
+                            <a href="#" class="border-b border-gray-500 border-dotted">
                                 Terms of Service
                             </a>
                             and its
-                            <a href="#" class="border-b border-gray-500 border-dotted text-blue-600">
+                            <a href="#" class="border-b border-gray-500 border-dotted">
                                 Privacy Policy
                             </a>
                         </p>
                     </div>
+                </div>
+        </div>
+        </form>
 
-                </form>
+        <div class="flex-1 text-center hidden lg:flex relative container login-container bg-[#f9fafb] p-4">
+
+
+            <!-- Background Blur -->
+            <div class="absolute rounded-3xl"></div>
+
+            <!-- Image -->
+            <img src="{{ asset('images/l (3).jpg') }}" alt="Student Studying"
+                class="w-full h-auto rounded-3xl object-cover object-left zoom-animation">
+
+            <!-- Overlay Text -->
+            <div
+                class="zoom-animation absolute bottom-4 text-white bg-gradient-to-t from-black/50 to-transparent filter-blur-[10px] w-[95.8%] rounded-b-3xl py-6">
+                <h2 class="text-3xl font-bold">Welcome to Edumaid</h2>
+                <p class="mt-2 text-lg">Empowering university students through knowledge.</p>
             </div>
 
 
+
+            <!-- 3D Book Animation Section -->
+            {{-- <div class="image-section">
+        <div class="book">
+          <div class="cover front"></div>
+          <div class="cover back"></div>
+          <div class="side"></div>
+          <div class="pages">
+            <div class="page"></div>
+            <div class="page page1"></div>
+            <div class="page page2"></div>
+            <div class="page page3"></div>
+            <div class="page"></div>
+
+          </div>
+        </div>
+      </div> --}}
         </div>
 
-
-
-
     </div>
     </div>
 
-</x-layout>
+
+
+
+
+    <div class="relative w-full max-w-lg">
+        <!-- Background Blur -->
+        <div class="absolute inset-0 bg-black/30 backdrop-blur-xl rounded-3xl"></div>
+
+        <!-- Image -->
+        <img src="{{ asset('images/login.png') }}" alt="Student Studying"
+            class="w-full h-auto rounded-3xl object-cover">
+
+        <!-- Overlay Text -->
+        <div class="absolute top-10 left-6 text-white">
+            <h2 class="text-3xl font-bold">Welcome to Edumaid</h2>
+            <p class="mt-2 text-lg">Empowering university students through knowledge.</p>
+        </div>
+    </div>
+
+
+    <div class="REMOVE-THIS-ELEMENT-IF-YOU-ARE-USING-THIS-PAGE hidden treact-popup fixed inset-0 flex items-center justify-center"
+        style="background-color: rgba(0,0,0,0.3);">
+        <div class="max-w-lg p-8 sm:pb-4 bg-white rounded shadow-lg text-center sm:text-left">
+
+            <h3 class="text-xl sm:text-2xl font-semibold mb-6 flex flex-col sm:flex-row items-center">
+                <div class="bg-green-200 p-2 rounded-full flex items-center mb-4 sm:mb-0 sm:mr-2">
+                    <svg class="text-green-800 inline-block w-5 h-5" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z">
+                        </path>
+                    </svg>
+                </div>
+                Free TailwindCSS Component Kit!
+            </h3>
+            <p>I recently released Treact, a <span class="font-bold">free</span> TailwindCSS Component Kit built with
+                React.
+            </p>
+            <p class="mt-2">It has 52 different UI components, 7 landing pages, and 8 inner pages prebuilt. And they
+                are
+                customizable!</p>
+            <div class="mt-8 pt-8 sm:pt-4 border-t -mx-8 px-8 flex flex-col sm:flex-row justify-end leading-relaxed">
+                <button
+                    class="close-treact-popup px-8 py-3 sm:py-2 rounded border border-gray-400 hover:bg-gray-200 transition duration-300">Close</button>
+                <a class="font-bold mt-4 sm:mt-0 sm:ml-4 px-8 py-3 sm:py-2 rounded bg-purple-700 text-gray-100 hover:bg-purple-900 transition duration-300 text-center"
+                    href="https://treact.owaiskhan.me" target="_blank">See Treact</a>
+            </div>
+        </div>
+    </div> -->
+</body>
+<script src="ass.js"></script>
+
+<x-footer>
+
+</x-footer>
+
+</html>

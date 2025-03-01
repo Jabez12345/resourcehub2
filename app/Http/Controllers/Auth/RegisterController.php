@@ -21,6 +21,7 @@ class RegisterController extends Controller
     {
         // Validate the input
         $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'department' => ['required', 'string', 'max:255'],
             'password' => [
@@ -48,7 +49,7 @@ class RegisterController extends Controller
             session()->flash('status', 'Registration successful! Welcome!');
 
             // Redirect to dashboard or any other page
-            return redirect()->route('auth.dashboard');
+            return redirect()->route('dashboard');
         } catch (\Exception $e) {
             // Flash an error message if something goes wrong
             session()->flash('error', 'Something went wrong during registration. Please try again.');

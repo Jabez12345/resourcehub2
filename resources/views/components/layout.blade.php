@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstat</title>
+    <title>EduMaid</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -18,293 +18,16 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
 
-<style>
-    .sound-wave {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: .5rem;
-        width: 3.75rem;
-        height: 2.5rem;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jura:wght@300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />   
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<!-- resources/views/layouts/app.blade.php -->
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    .sound-wave div {
-        height: 2.5rem;
-        display: block;
-        width: .6rem;
-        border-radius: .5rem;
-        background: orange;
-        animation: audio-wave 1.5s infinite ease-in-out;
-    }
-
-    .sound-wave div:nth-child(2) {
-        left: 11px;
-        animation-delay: 0.2s;
-    }
-
-    .sound-wave div:nth-child(3) {
-        left: 22px;
-        animation-delay: 0.4s;
-    }
-
-    .sound-wave div:nth-child(4) {
-        left: 33px;
-        animation-delay: 0.6s;
-    }
-
-    .sound-wave div:nth-child(5) {
-        left: 44px;
-        animation-delay: 0.8s;
-    }
-
-    @keyframes audio-wave {
-        0% {
-            height: 6px;
-            transform: translateY(0px);
-            background: #ff8e3a;
-        }
-
-        25% {
-            height: 40px;
-            transform: translateY(-5px) scale(1.7);
-            background: #ed509e;
-        }
-
-        50% {
-            height: 6px;
-            transform: translateY(0px);
-            background: #0057E9;
-        }
-
-        100% {
-            height: 6px;
-            transform: translateY(0px);
-            background: #0fccce;
-        }
-    }
-
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: white;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: white;
-        box-shadow: 0 8px 16px rgba(248, 215, 215, 0.2);
-        z-index: 1;
-        transition: 3s ease-in-out;
-        border-radius: 8px;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-        transition: .3s ease-in-out;
-    }
-
-    .fade-in {
-        animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    .wave {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 200px;
-        background: url('https://www.svgrepo.com/show/2046/wave.svg') repeat-x;
-        background-size: cover;
-        animation: wave 10s linear infinite;
-    }
-
-    @keyframes wave {
-        0% {
-            background-position-x: 0;
-        }
-
-        100% {
-            background-position-x: 1000px;
-        }
-    }
-
-    .dotted-animation {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-        background-size: 20px 20px;
-        animation: moveDots 5s linear infinite;
-    }
-
-    @keyframes moveDots {
-        0% {
-            background-position: 0 0;
-        }
-
-        100% {
-            background-position: 20px 20px;
-        }
-    }
-
-    /* Smooth Transition for Expanding Search */
-    #search-bar {
-        transition: all 0.3s ease-in-out;
-    }
-
-    #search-bar:focus {
-        width: 100%;
-        /* Expand on focus */
-
-    }
-
-    #search-results {
-        display: none;
-        /* Hidden initially */
-    }
-
-    #search-results.active {
-        display: block;
-        /* Show results */
-        max-height: 300px;
-        overflow-y: auto;
-    }
-
-    /* Styling the No Results Illustration */
-    #search-results .no-results {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        gap: 10px;
-        color: #6b7280;
-        /* Gray-500 for text */
-    }
-
-    #search-results .no-results img {
-        width: 150px;
-        height: auto;
-        opacity: 0.8;
-    }
-
-    #popular-materials {
-        transition: transform 0.3s ease-in-out;
-    }
-    /* .moving-box {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background-color: rgba(59, 130, 246, 0.1);
-            border: 2px solid rgba(59, 130, 246, 0.1);
-            border-radius: 50%;
-            animation: move3d 10s infinite alternate;
-            transform-style: preserve-3d;
-        }
-        .rotating-box {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background-color: rgba(255, 99, 132, 0.1);
-            border: 2px solid rgba(255, 99, 132, 0.1);
-            animation: rotate3d 10s infinite linear;
-            transform-style: preserve-3d;
-        } 
-        .floating-icon {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(34, 197, 94, 0.1);
-            border: 2px solid rgba(34, 197, 94, 0.3);
-            border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
-        }
-        @keyframes move3d {
-            0% {
-                top: 10%;
-                left: 80%;
-                transform: rotateX(0deg) rotateY(0deg);
-            }
-            100% {
-                top: 80%;
-                left: 80%;
-                transform: rotateX(360deg) rotateY(360deg);
-            }
-        }
-        @keyframes rotate3d {
-            0% {
-                top: 70%;
-                left: 10%;
-                transform: rotateX(0deg) rotateY(0deg);
-            }
-            100% {
-                top: 70%;
-                left: 10%;
-                transform: rotateX(360deg) rotateY(360deg);
-            }
-        }
-        @keyframes float {
-            0% {
-                top: 20%;
-                left: 20%;
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-            100% {
-                top: 20%;
-                left: 20%;
-                transform: translateY(0);
-            }
-        } */
-
-
-         /* 3D Cube styles */
-    .cube {
-      transform-style: preserve-3d;
-      animation: spin 5s linear infinite;
-    }
-
-    .cube-face {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      /* background: #0057E9; */
-      /* border: 2px solid rgb(177, 210, 243); */
-    }
-
-    .front { transform: translateZ(50px); }
-    .back { transform: rotateY(180deg) translateZ(50px); }
-    .left { transform: rotateY(-90deg) translateZ(50px); }
-    .right { transform: rotateY(90deg) translateZ(50px); }
-    .top { transform: rotateX(90deg) translateZ(50px); }
-    .bottom { transform: rotateX(-90deg) translateZ(50px); }
-
-    @keyframes spin {
-      0% { transform: rotateX(0) rotateY(0); }
-      100% { transform: rotateX(360deg) rotateY(360deg); }
-    }
-       
-</style>
 </head>
 
-<div id="preloader" class="bg-gray-100 fixed z-40 top-0 w-full h-full flex items-center justify-center ">
+<div id="preloader" class="bg-white fixed z-40 top-0 w-full h-full flex items-center justify-center ">
     <div class="flex-col items-center justify-center">
         <div class="sound-wave">
             <div></div>
@@ -317,17 +40,21 @@
     </div>
 </div>
 
-<body class="text-gray-900 bg-transparent" id="body">
-    <div class="dotted-animation z-[-1]"></div>
-    <header id="header" class="flex items-center justify-between py-4 px-2 lg:px-8 fade-in fixed z-20 top-0 w-full bg-transparent">
+<body class="text-gray-900 bg-transparent relative" id="body">
+    
+    @auth
+    
+    @else
+    
+    <header id="header" class="flex items-center justify-between px-2 lg:px-8 fade-in fixed z-20 top-0 w-full bg-transparent">
         <!-- Logo -->
         <a href="/">
             <div class="flex items-center">
-                <img alt="BookStats logo" class="w-20 h-20" height="40" src="{{ asset('\images/logo.png') }}"
+                <img alt="EduMaid logo" class="w-20 h-20" height="40" src="{{ asset('\images/logo.png') }}"
                     width="40" />
-                <span class="text-blue-600 text-xl lg:text-2xl  font-bold"
+                <span class="text-blue-600 text-xl lg:text-3xl  font-bold"
                     style="color: #0057E9; text-shadow: 0 10px 12px 0 rgba(78, 75, 250, 0.1);">
-                    BOOKSTATS
+                    EduMaid
                 </span>
             </div>
         </a>
@@ -337,14 +64,14 @@
             onclick="toggleMenu()">
             <i class="fas fa-bars text-2xl"></i>
         </button>
-
-        <!-- Desktop Menu -->
-        <nav class="desktop-menu hidden md:flex items-center space-x-4 xl:space-x-8">
+     
+    <!-- Desktop Menu -->
+        <nav class="desktop-menu hidden md:flex items-center space-x-4 xl:space-x-8 text-lg" style="font-weight: 600;">
             <div class="relative dropdown">
-                <button class="text-gray-700 font-medium">
+                <button class="text-gray-700">
                     Top Lists <i class="fas fa-chevron-down ml-1"></i>
                 </button>
-                <div class="dropdown-content mt-2 rounded-lg shadow-lg p-4 w-[200px]">
+                <div class="dropdown-content mt-2 rounded-lg shadow-lg p-4 w-[200px]" style="font-weight: 400;">
                     <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md" href="#">New
                         Materials</a>
                     <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md" href="#">Popular
@@ -354,10 +81,10 @@
                 </div>
             </div>
             <div class="relative dropdown">
-                <button class="text-gray-700 font-medium">
+                <button class="text-gray-700">
                     VTUs <i class="fas fa-chevron-down ml-1"></i>
                 </button>
-                <div class="dropdown-content mt-2 rounded-lg shadow-lg p-4 w-[200px]">
+                <div class="dropdown-content mt-2 rounded-lg shadow-lg p-4 w-[200px]" style="font-weight: 400;">
                     <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md" href="#">Data
                         Services</a>
                     <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md" href="#">Airtime
@@ -366,7 +93,7 @@
                         Services</a>
                 </div>
             </div>
-            <a href="#" class="text-gray-700 font-medium">Contact Us</a>
+            <a href="#" class="text-gray-700">Contact Us</a>
             <div class="relative hidden lg:visible">
                 <input
                     class="bg-[#f1f3f4] rounded-[46px] border border-transparent h-[48px] px-[12px] py-[8px] w-full md:w-[200px] transition-all duration-200 ease-in-out"
@@ -376,11 +103,11 @@
             <div class="flex gap-4">
                 <a href="/login">
                     <button
-                        class="text-gray-700 font-medium px-[16px] rounded-[8px] border border-gray-200 h-[48px] hover:bg-gray-100">Log
+                        class="text-gray-700 px-[16px] rounded-[8px] border-2 border-gray-200 h-[48px] hover:bg-gray-100">Log
                         In</button>
                 </a>
                 <a href="/register">
-                    <button class="flex items-center gap-2 text-white font-medium px-4 py-2 rounded-[8px] h-[48px]"
+                    <button class="flex items-center gap-2 text-white px-4 py-2 rounded-[8px] h-[48px]"
                         style="background: #0057E9; box-shadow: 0 10px 12px 0 rgba(78, 75, 250, 0.1);">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12" width="20"
                             height="20">
@@ -400,7 +127,8 @@
                         </svg>
                     </button>
 
-
+    
+@endauth
                     <div class="bg-white rounded-lg shadow-lg p-4 w-64 absolute right-0 top-14 hidden" id="dotm">
                        
                         <div class="mt-4">
@@ -519,41 +247,7 @@
    
 
     {{ $slot }}
-    <footer class="mt-16 py-8 border-t border-gray-200 text-center fade-in">
-        <div class="flex justify-center space-x-4 mb-4">
-            <i class="fab fa-youtube text-2xl">
-            </i>
-            <i class="fab fa-discord text-2xl">
-            </i>
-            <i class="fab fa-instagram text-2xl">
-            </i>
-            <i class="fab fa-x-twitter text-2xl">
-            </i>
-            <i class="fab fa-linkedin text-2xl">
-            </i>
-        </div>
-        <div class="flex flex-wrap justify-center space-x-4 text-gray-600">
-            <a class="hover:underline" href="#">
-                Accessibility
-            </a>
-            <a class="hover:underline" href="#">
-                Terms of Use
-            </a>
-            <a class="hover:underline" href="#">
-                Privacy Policy
-            </a>
-            <a class="hover:underline" href="#">
-                Help Center
-            </a>
-            <a class="hover:underline" href="#">
-                FAQ
-            </a>
-        </div>
-        <p class="mt-4 text-gray-500">
-            © BookStats 2025
-        </p>
-    </footer>
-
+    
 
     <script>
         // Toggle mobile menu and hamburger icon
@@ -575,9 +269,9 @@
         window.addEventListener("scroll", function() {
         const navbar = document.getElementById("header");
         if (window.scrollY > 50) {
-            navbar.classList.add("bg-white", "shadow-md");
+            navbar.classList.add("bg-gray-50", "shadow-md");
         } else {
-            navbar.classList.remove("bg-white", "shadow-md");
+            navbar.classList.remove("bg-gray-50", "shadow-md");
         }
     });
 
@@ -586,9 +280,8 @@
                 dropdown.querySelector('.dropdown-content').style.display = 'block';
             });
             dropdown.addEventListener('mouseleave', () => {
-                setTimeout(() => {
-                    dropdown.querySelector('.dropdown-content').style.display = 'none';
-                }, 1000);
+                dropdown.querySelector('.dropdown-content').style.display = 'none';
+              
             });
         });
 
